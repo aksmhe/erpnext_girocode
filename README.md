@@ -7,6 +7,7 @@ Das Abtippen der IBAN entfällt, Tippfehler auch, und Zahlungen lassen sich leic
 - Der Code entsteht **lokal auf dem eigenen Server**. Es werden **keine Rechnungsdaten** an externe Dienste gesendet, z. B. QR-Generatoren im Internet.
 - IBAN, BIC und Firmenname kommen aus ERPNext (**Bankkonto** und **Firma**). Im Code steht nichts fest.
 - Keine zusätzlichen Bibliotheken: Die App nutzt `pyqrcode`, das ohnehin mit Frappe installiert ist.
+- Entwickelt von [AffiKSys](https://affiksys.com/), siehe [unten](#entwickelt-von).
 
 ---
 
@@ -258,6 +259,15 @@ python -m unittest erpnext_girocode.tests.test_epc
 - Die App speichert **nichts** und legt keine Tabellen an. Sie liest nur Bankkonto, Bank und Firma.
 - Die App hat **keine** eigene Web-Schnittstelle (API). Sie läuft nur beim Drucken.
 - Im Code stehen **keine Zugangsdaten**, keine IBAN und keine Firmendaten.
+
+---
+
+## Entwickelt von
+
+<a href="https://affiksys.com/" title="Zur Webseite von AffiKSys: affiksys.com"><img src="docs/affiksys-karte.png" alt="AffiKSys – Affiliate KDP Systems" width="210"></a>
+
+Entwickelt von der **[Lerner & Heide AffiKSys GbR](https://affiksys.com/)** für den eigenen Einsatz mit ERPNext und kostenlos für alle bereitgestellt.
+Fehler oder Ideen? Gern als [Issue auf GitHub](https://github.com/aksmhe/erpnext_girocode/issues) melden.
 
 ---
 
