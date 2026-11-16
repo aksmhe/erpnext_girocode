@@ -1,0 +1,25 @@
+{#- GiroCode-Baustein für ein Jinja-Druckformat (z. B. Ausgangsrechnung / Sales Invoice).
+    Einfügen nach der Summen-Tabelle. Braucht die App "erpnext_girocode".
+    Ist die App nicht installiert, wird der Baustein einfach übersprungen. -#}
+{% set gc = get_girocode_data(doc) if get_girocode_data is defined else None %}
+{% if gc %}
+<table class="girocode-block" style="width: 100%; margin-top: 6mm; page-break-inside: avoid;">
+    <tr>
+        <td style="width: 32mm; vertical-align: top; padding: 0;">
+            <img src="{{ gc.qr }}" alt="GiroCode" style="width: 30mm; height: 30mm; display: block;">
+        </td>
+        <td style="vertical-align: top; padding: 0 0 0 4mm;" class="text-small">
+            <strong>
+                Bitte überweisen Sie
+                {% if gc.amount %}{{ frappe.utils.fmt_money(gc.amount, currency="EUR") }}{% else %}den Rechnungsbetrag{% endif %}
+                {% if doc.due_date %}bis {{ frappe.utils.formatdate(doc.due_date, "dd.mm.yyyy") }}{% endif %}
+                auf folgendes Konto:
+            </strong><br>
+            Kontoinhaber: {{ gc.name }}<br>
+            IBAN: {{ gc.iban_formatted }}{% if gc.bic %} &#183; BIC: {{ gc.bic }}{% endif %}{% if gc.bank %} &#183; {{ gc.bank }}{% endif %}<br>
+            Verwendungszweck: {{ gc.reference }}<br>
+            <span style="color: #6c757d;">Bequem bezahlen: QR-Code mit der Banking-App scannen (GiroCode).</span>
+        </td>
+    </tr>
+</table>
+{% endif %}
